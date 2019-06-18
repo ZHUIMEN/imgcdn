@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='./alphaimg.js'></script>
+    <style>
+        body{
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+    <div id="framePlayer"></div>
+</body>
+<script>
+//将所有图片放入一个数组
+var imgArr = [];
+for(let i =0 ; i<=679 ; i++ ){
+    i = (i+'').padStart('3',0);
+    imgArr.push(`ZV_LOGO_${i}.png`)
+
+}
+// console.log(imgArr+'')
+//实例化vFramePlayer
+var framePlayer = new vFramePlayer({
+    dom : document.getElementById("framePlayer"),
+    imgArr : imgArr,
+    useCanvas:true,
+    fps:30,
+    onComplete : function () {
+        console.log("播放完成");
+    },
+    onUpdate : function (frame,times,asc) {
+        console.log("当前播放第"+ frame +"帧");
+        console.log("已经循环播放"+ times +"次");
+        console.log("当前是否是升序播放："+ asc);
+    }
+    
+});
+framePlayer.play()
+framePlayer.on('update',(frame,times,asc)=>{
+    console.log(frame,times,asc);
+})
+framePlayer.on("play",function () {
+    console.log("开始播放");
+})
+</script>
+</html>
